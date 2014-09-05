@@ -1,0 +1,13 @@
+services:
+    anime_db.api.client:
+        class: AnimeDb\Bundle\ApiClientBundle\Service\Client
+        arguments:
+            - @anime_db.api.client.client
+            - %anime_db.api.prefix%
+            - %anime_db.api.version%
+            - %anime_db.site.host%
+
+    anime_db.api.client.client:
+        class: Guzzle\Http\Client
+        arguments: [ %anime_db.api.host% ]
+        public: false
