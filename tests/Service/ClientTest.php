@@ -46,7 +46,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      *
      * @var string
      */
-    protected $locale = 'en';
+    protected $locale = Client::DEFAULT_LOCALE;
 
     /**
      * Client
@@ -63,6 +63,13 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     protected $guzzle;
 
     /**
+     * List of available locales
+     *
+     * @var array
+     */
+    protected $locales = ['en', 'ru'];
+
+    /**
      * (non-PHPdoc)
      * @see PHPUnit_Framework_TestCase::setUp()
      */
@@ -70,7 +77,14 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
         $this->guzzle = $this->getMock('\Guzzle\Http\Client');
-        $this->client = new Client($this->guzzle, $this->locale, $this->host, $this->prefix, $this->version);
+        $this->client = new Client(
+            $this->guzzle,
+            $this->host,
+            $this->prefix,
+            $this->version,
+            $this->locales,
+            $this->locale
+        );
     }
 
     /**
@@ -79,6 +93,38 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     public function testGetHost()
     {
         $this->assertEquals($this->host, $this->client->getHost());
+    }
+
+    /**
+     * Get locales
+     *
+     * @return array
+     */
+    public function getLocales()
+    {
+        return [
+            ['en', true, 'en'],
+            ['ru', true, 'ru'],
+            ['en_US', true, 'en'],
+            ['ru_RU', true, 'ru'],
+            ['fr', false, $this->locale],
+            ['fr_FR', false, $this->locale],
+        ];
+    }
+
+    /**
+     * Test locale
+     *
+     * @dataProvider getLocales
+     *
+     * @param string $locale
+     * @param boolean $result
+     * @param string $expected
+     */
+    public function testLocale($locale, $result, $expected)
+    {
+        $this->assertEquals($result, $this->client->setLocale($locale));
+        $this->assertEquals($expected, $this->client->getLocale());
     }
 
     /**
