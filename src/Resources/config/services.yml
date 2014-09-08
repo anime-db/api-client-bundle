@@ -3,6 +3,7 @@ services:
         class: AnimeDb\Bundle\ApiClientBundle\Service\Client
         arguments:
             - @anime_db.api.client.client
+            - %locale%
             - %anime_db.api.prefix%
             - %anime_db.api.version%
             - %anime_db.site.host%

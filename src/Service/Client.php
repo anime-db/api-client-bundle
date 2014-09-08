@@ -46,14 +46,15 @@ class Client
      * Construct
      *
      * @param \Guzzle\Http\Client $client
+     * @param string $locale
      * @param string $host
      * @param string $prefix
      * @param string $version
      */
-    public function __construct(Guzzle $client, $host, $prefix, $version) {
+    public function __construct(Guzzle $client, $locale, $host, $prefix, $version) {
         $this->client = $client;
         $this->host = $host;
-        $this->prefix = $prefix.'/v'.$version;
+        $this->prefix = $prefix.'/v'.$version.'/'.$locale;
     }
 
     /**

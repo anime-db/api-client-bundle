@@ -28,7 +28,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     protected $version = 100500;
 
     /**
-     * Host
+     * Site host
      *
      * @var string
      */
@@ -40,6 +40,13 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      * @var string
      */
     protected $prefix = '/bar';
+
+    /**
+     * Locale
+     *
+     * @var string
+     */
+    protected $locale = 'en';
 
     /**
      * Client
@@ -63,7 +70,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
         $this->guzzle = $this->getMock('\Guzzle\Http\Client');
-        $this->client = new Client($this->guzzle, $this->host, $this->prefix, $this->version);
+        $this->client = new Client($this->guzzle, $this->locale, $this->host, $this->prefix, $this->version);
     }
 
     /**
@@ -135,7 +142,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('get')
             ->willReturn($request)
-            ->with($this->prefix.'/v'.$this->version.$path);
+            ->with($this->prefix.'/v'.$this->version.'/'.$this->locale.$path);
         $request
             ->expects($this->once())
             ->method('send')
