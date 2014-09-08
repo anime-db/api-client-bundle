@@ -3,10 +3,11 @@ services:
         class: AnimeDb\Bundle\ApiClientBundle\Service\Client
         arguments:
             - @anime_db.api.client.client
-            - %locale%
             - %anime_db.api.prefix%
             - %anime_db.api.version%
             - %anime_db.site.host%
+            - %anime_db.api.locales%
+            - %locale%
 
     anime_db.api.client.client:
         class: Guzzle\Http\Client

@@ -3,3 +3,6 @@ parameters:
     anime_db.api.host: 'http://anime-db.org'
     anime_db.api.prefix: '/api'
     anime_db.api.version: 1
+    anime_db.api.locales:
+        - 'en'
+        - 'ru'
