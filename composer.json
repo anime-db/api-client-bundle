@@ -4,7 +4,6 @@
     "type": "library",
     "description": "API client bundle for Anime DB",
     "homepage": "http://anime-db.org",
-    "version": "0.1.2",
     "authors": [
         {
             "name": "Anime DB",
