@@ -157,4 +157,16 @@ class Client
         }
         return json_decode($response->getBody(true), true);
     }
+
+    /**
+     * Get site URL
+     *
+     * @param string $path
+     *
+     * @return string
+     */
+    public function getSiteUrl($path)
+    {
+        return $this->host.'/'.$this->locale.$path;
+    }
 }
