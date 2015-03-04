@@ -210,4 +210,33 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                 ->method('getBody');
         }
     }
+
+    /**
+     * Get paths
+     *
+     * @return array
+     */
+    public function getPaths()
+    {
+        return [
+            ['/foo/', 'ru'],
+            ['/bar.html', 'ru'],
+            ['/foo/', 'en'],
+            ['/bar.html', 'en'],
+        ];
+    }
+
+    /**
+     * Test get site URL
+     *
+     * @dataProvider getPaths
+     *
+     * @param string $path
+     * @param string $locale
+     */
+    public function testGetSiteUrl($path, $locale)
+    {
+        $this->client->setLocale($locale);
+        $this->assertEquals($this->host.'/'.$locale.$path, $this->client->getSiteUrl($path));
+    }
 }
